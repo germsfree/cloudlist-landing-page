@@ -294,6 +294,47 @@ main {
 }
 
 /* ========================================
+   Socials
+   ======================================== */
+
+.socials-section {
+  text-align: center;
+}
+
+.socials {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 14px 24px;
+  background: #FFFFFF;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 16px;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.social-link svg {
+  width: 20px;
+  height: 20px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.social-link:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+/* ========================================
    Signup section
    ======================================== */
 
@@ -441,6 +482,15 @@ footer {
 
   .footer-center {
     order: 2;
+  }
+
+  .socials {
+    gap: 10px;
+  }
+
+  .social-link {
+    padding: 13px 20px;
+    font-size: 15px;
   }
 }
 
