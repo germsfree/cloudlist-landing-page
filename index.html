@@ -22,16 +22,15 @@
 
       <div class="signup">
         <p class="signup-label">get notified when we launch on august 1.</p>
-        <form
-          action="https://buttondown.com/api/emails/embed-subscribe/cloudlist.app"
-          method="post"
-          class="embeddable-buttondown-form email-form"
-          target="popupwindow"
-          onsubmit="window.open('https://buttondown.com/cloudlist.app', 'popupwindow')"
-        >
-          <input type="email" name="email" id="bd-email" placeholder="your email" required>
+        <form class="email-form" data-buttondown>
+          <input type="email" name="email" placeholder="your email" required>
           <button type="submit">notify me →</button>
         </form>
+        <div class="form-success" hidden>
+          <p>you're on the list. see you august 1. 🌥</p>
+          <p class="form-success-note">in the meantime, we're on <a href="https://www.tiktok.com/@cloudlist.app" target="_blank" rel="noopener">tiktok</a> and <a href="https://www.instagram.com/cloudlist.app" target="_blank" rel="noopener">instagram</a>.</p>
+        </div>
+        <p class="form-error" hidden>something went wrong. try again, or email hello@cloudlist.app</p>
         <p class="signup-note">no spam. just one email when we're live.</p>
       </div>
     </section>
@@ -141,18 +140,55 @@
     <section class="section signup-section">
       <h2 class="section-heading">be one of the first to try it</h2>
       <p class="sub-heading">we launch august 1.<br>get the app store link the moment it goes live.</p>
-      <form
-        action="https://buttondown.com/api/emails/embed-subscribe/cloudlist.app"
-        method="post"
-        class="embeddable-buttondown-form email-form"
-        target="popupwindow"
-        onsubmit="window.open('https://buttondown.com/cloudlist.app', 'popupwindow')"
-      >
-        <input type="email" name="email" id="bd-email-2" placeholder="your email" required>
+      <form class="email-form" data-buttondown>
+        <input type="email" name="email" placeholder="your email" required>
         <button type="submit">get the link →</button>
       </form>
+      <div class="form-success" hidden>
+          <p>you're on the list. see you august 1. 🌥</p>
+          <p class="form-success-note">in the meantime, we're on <a href="https://www.tiktok.com/@cloudlist.app" target="_blank" rel="noopener">tiktok</a> and <a href="https://www.instagram.com/cloudlist.app" target="_blank" rel="noopener">instagram</a>.</p>
+        </div>
+      <p class="form-error" hidden>something went wrong. try again, or email hello@cloudlist.app</p>
     </section>
   </main>
+
+  <script>
+    document.querySelectorAll('form[data-buttondown]').forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        var input = form.querySelector('input[type="email"]');
+        var button = form.querySelector('button');
+        var success = form.parentElement.querySelector('.form-success');
+        var error = form.parentElement.querySelector('.form-error');
+        var originalLabel = button.textContent;
+
+        if (!input.value) return;
+
+        button.textContent = 'signing you up...';
+        button.disabled = true;
+        if (error) error.hidden = true;
+
+        var body = new FormData();
+        body.append('email', input.value);
+
+        fetch('https://buttondown.com/api/emails/embed-subscribe/cloudlist.app', {
+          method: 'POST',
+          body: body,
+          mode: 'no-cors'
+        })
+          .then(function () {
+            form.hidden = true;
+            if (success) success.hidden = false;
+          })
+          .catch(function () {
+            button.textContent = originalLabel;
+            button.disabled = false;
+            if (error) error.hidden = false;
+          });
+      });
+    });
+  </script>
 
   <footer>
     <div class="footer-inner">
