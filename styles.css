@@ -66,8 +66,16 @@ main {
   font-style: italic;
   font-size: 28px;
   color: var(--ink);
-  margin-bottom: 60px;
+  margin-bottom: 14px;
   letter-spacing: -0.3px;
+}
+
+.logo {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 60px;
+  display: block;
+  border-radius: 14px;
 }
 
 .tagline {
@@ -124,6 +132,7 @@ main {
   color: var(--ink);
   outline: none;
   transition: border-color 0.15s ease;
+  text-align: center;
 }
 
 .email-form input[type="email"]::placeholder {
@@ -376,12 +385,17 @@ footer {
   }
 
   .wordmark {
+    margin-bottom: 12px;
+  }
+
+  .logo {
     margin-bottom: 40px;
   }
 
   .tagline {
-    font-size: 40px;
-    letter-spacing: -0.5px;
+    font-size: 33px;
+    letter-spacing: -0.4px;
+    line-height: 1.2;
   }
 
   .sub-tagline {
