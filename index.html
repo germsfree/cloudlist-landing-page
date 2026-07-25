@@ -22,7 +22,9 @@
 
       <div class="signup">
         <p class="signup-label">get notified when we launch on august 1.</p>
-        <form class="email-form" data-buttondown>
+        <form class="email-form" data-buttondown
+              action="https://buttondown.com/api/emails/embed-subscribe/cloudlist.app"
+              method="post" target="bd-sink">
           <input type="email" name="email" placeholder="your email" required>
           <button type="submit">notify me →</button>
         </form>
@@ -140,7 +142,9 @@
     <section class="section signup-section">
       <h2 class="section-heading">be one of the first to try it</h2>
       <p class="sub-heading">we launch august 1.<br>get the app store link the moment it goes live.</p>
-      <form class="email-form" data-buttondown>
+      <form class="email-form" data-buttondown
+              action="https://buttondown.com/api/emails/embed-subscribe/cloudlist.app"
+              method="post" target="bd-sink">
         <input type="email" name="email" placeholder="your email" required>
         <button type="submit">get the link →</button>
       </form>
@@ -152,40 +156,22 @@
     </section>
   </main>
 
+  <iframe name="bd-sink" style="display:none" aria-hidden="true" tabindex="-1"></iframe>
+
   <script>
     document.querySelectorAll('form[data-buttondown]').forEach(function (form) {
-      form.addEventListener('submit', function (event) {
-        event.preventDefault();
-
+      form.addEventListener('submit', function () {
         var input = form.querySelector('input[type="email"]');
-        var button = form.querySelector('button');
-        var success = form.parentElement.querySelector('.form-success');
-        var error = form.parentElement.querySelector('.form-error');
-        var originalLabel = button.textContent;
-
         if (!input.value) return;
 
-        button.textContent = 'signing you up...';
-        button.disabled = true;
-        if (error) error.hidden = true;
+        var success = form.parentElement.querySelector('.form-success');
 
-        var body = new FormData();
-        body.append('email', input.value);
-
-        fetch('https://buttondown.com/api/emails/embed-subscribe/cloudlist.app', {
-          method: 'POST',
-          body: body,
-          mode: 'no-cors'
-        })
-          .then(function () {
-            form.hidden = true;
-            if (success) success.hidden = false;
-          })
-          .catch(function () {
-            button.textContent = originalLabel;
-            button.disabled = false;
-            if (error) error.hidden = false;
-          });
+        // The form posts natively into the hidden iframe, so we just
+        // swap the UI. Small delay lets the POST fire first.
+        setTimeout(function () {
+          form.hidden = true;
+          if (success) success.hidden = false;
+        }, 150);
       });
     });
   </script>
