@@ -168,9 +168,10 @@
         var button = form.querySelector('button');
 
         // Immediate feedback on the button, in case anything below fails.
+        // NOTE: never set input.disabled here — disabled fields are
+        // excluded from the form submission, so the email would not send.
         button.textContent = 'we got you 🌥';
-        button.disabled = true;
-        input.disabled = true;
+        input.readOnly = true;
 
         // The form posts natively into the hidden iframe, so we just
         // swap the UI. Small delay lets the POST fire first.
