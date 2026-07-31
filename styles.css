@@ -402,6 +402,41 @@ main {
 }
 
 /* ========================================
+   Download CTA
+   ======================================== */
+
+.cta-button {
+  display: block;
+  width: 100%;
+  max-width: 460px;
+  margin: 0 auto 12px;
+  padding: 14px 22px;
+  border-radius: 12px;
+  background: var(--accent);
+  color: #FFFFFF;
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+
+.cta-button:hover {
+  opacity: 0.9;
+}
+
+.cta-button:active {
+  opacity: 0.8;
+}
+
+.signup-divider {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  font-size: 15px;
+}
+
+/* ========================================
    Footer
    ======================================== */
 
